@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Fetch. Task 1</title>
+</head>
+
+<body>
+    <h1>
+        Network requests
+    </h1>
+    <h2>
+        Fetch
+    </h2>
+    <p>
+        1. Создайте асинхронную функцию getUsers(names), которая получает на вход массив логинов пользователей GitHub,
+        запрашивает у GitHub информацию о них и возвращает массив объектов-пользователей.
+    </p>
+    <p>
+        Важные детали:
+    </p>
+    <ol>
+        <li>На каждого пользователя должен приходиться один запрос fetch.</li>
+        <li>Запросы не должны ожидать завершения друг друга. Надо, чтобы данные приходили как можно быстрее.</li>
+        <li>Если какой-то запрос завершается ошибкой или оказалось, что данных о запрашиваемом пользователе нет, то
+            функция должна возвращать null в массиве результатов.</li>
+    </ol>
+    <script>
+
+        async function getUsers(names) {
+            let pages = [];
+            for (let name of names) {
+                let page = fetch(`https://api.github.com/users/${name}`).then(response => {
+                    if (response.status != 200) {
+                        return null;
+                    } else {
+                        return response.json()
+                    }
+                }, error => {
+                    return null;
+                })
+                pages.push(page);
+            }
+            let result = await Promise.all(pages);
+            return result
+        }
+
+        (async function () {
+            let users = await getUsers(['ValeriyaLukovkina', 'iliakan', 'remy', 'no.such.users']);
+            console.log(users);
+            alert(users[0].login);
+            alert(users[1].login);
+            alert(users[2].login);
+        })()
+    </script>
+</body>
+
+</html>

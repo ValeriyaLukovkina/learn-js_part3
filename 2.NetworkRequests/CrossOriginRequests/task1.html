@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Fetch: Cross-Origin Requests. Task 1</title>
+</head>
+
+<body>
+    <h1>
+        Network requests
+    </h1>
+    <h2>
+        Fetch: Cross-Origin Requests
+    </h2>
+    <p>
+        1. Как вы, вероятно, знаете, существует HTTP-заголовок Referer, который обычно содержит адрес страницы,
+        инициировавшей сетевой запрос.
+    </p>
+    <p>
+        Например, при запросе (fetch) http://google.com с http://javascript.info/some/url заголовки выглядят так:
+    </p>
+    <pre><code>
+        Accept: */*
+        Accept-Charset: utf-8
+        Accept-Encoding: gzip,deflate,sdch
+        Connection: keep-alive
+        Host: google.com
+        Origin: http://javascript.info
+        Referer: http://javascript.info/some/url
+    </code></pre>
+    <p>
+        Как вы можете видеть, присутствуют и Referer, и Origin.
+    </p>
+    <p>
+        Вопросы:
+    </p>
+    <ol>
+        <li>Почему нужен Origin, если Referer содержит даже больше информации?</li>
+        <li>Возможно ли отсутствие Referer или Origin, или это неправильно?</li>
+    </ol>
+    <p>
+        Ответ: Referer является необязельным параметром. Иногда referer отсутствует из-за политики безопасности. Из-за
+        этого есть Origin, который гарантирует правильность при запросах на другой источник.
+    </p>
+    <script>
+    </script>
+</body>
+
+</html>
